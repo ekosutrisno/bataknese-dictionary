@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+@layer utilities {
+  .the-header {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    background-color: hsla(0, 0%, 100%, 0.75);
+  }
+
+  .toast-style {
+    @apply bg-basePurple;
+    @apply border border-purple-300 shadow-xl;
+  }
+
+  .rounded-custom-b {
+    border-bottom-right-radius: 2.5rem /* 16px */;
+    border-bottom-left-radius: 2.5rem /* 16px */;
+  }
+
+  .with-transition {
+    animation: 0.5s appear;
+  }
+
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
