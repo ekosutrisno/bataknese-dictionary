@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 
 @layer utilities {
@@ -36,5 +36,22 @@ body {
     100% {
       opacity: 1;
     }
+  }
+
+  /* Card Style */
+  .card-container {
+    @apply with-transition hover:from-indigo-400 hover:to-basePurple hover:text-white rounded-lg relative border p-2.5 flex flex-col space-y-2 hover:shadow-xl hover:shadow-indigo-500/20 bg-gradient-to-br transition cursor-pointer;
+  }
+
+  .card-batak-text {
+    @apply inline-flex items-center space-x-2 text-sm;
+  }
+
+  .card-batak-svg {
+    @apply group-hover:text-gray-200 text-basePurple h-4 w-4 transition;
+  }
+
+  .card-svg {
+    @apply h-6 w-6 transform rotate-90 top-0 right-2 absolute text-white;
   }
 }

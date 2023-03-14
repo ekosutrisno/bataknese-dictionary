@@ -51,7 +51,7 @@ function searching() {
     shouldSort: true,
     // includeMatches: false,
     // findAllMatches: false,
-    minMatchCharLength: 2,
+    minMatchCharLength: 3,
     // location: 0,
     // threshold: 0.6,
     // distance: 100,
@@ -65,6 +65,6 @@ function searching() {
   };
 
   const fuse = new Fuse(dictionary.value, options);
-  return fuse.search(query.value).sort((s, b)=>s.score! - b.score!);
+  return fuse.search(query.value).sort((s, b)=> s.score! - b.score!);
 }
 </script>
