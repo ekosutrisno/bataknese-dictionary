@@ -12,14 +12,18 @@ export function connect() {
 
   stompClient.connect({ company: "Bataknese App", server: "AAA" }, function (__frame) {
     if (stompClient) {
-      stompClient.subscribe(import.meta.env.VITE_BASE_WEB_SOCKET_TOPIC, function (message) {
+      stompClient.subscribe("/topic/data.admin", function (message) {
         const notif = JSON.parse(message.body) as Message;
-        $toast.open({
-          message: `Data has been ${notif.eventName}`,
-          type: notifTypeMapper(notif.eventName),
-          position: 'top-right',
-          queue: true
-        });
+        notify(notif);
+      });
+
+      stompClient.subscribe("/topic/message.admin", function (message) {
+        const notif = JSON.parse(message.body) as Message;
+        notify(notif);
+      });
+
+      stompClient.subscribe("/topic/notification.admin", function (message) {
+        const notif = JSON.parse(message.body) as Message;
         notify(notif);
       });
     }
@@ -36,8 +40,8 @@ export function disconnect() {
 
 export function notify(notif: Message) {
   const options = {
-    title: `${notif?.eventName}`,
-    body: `Hi User, ${notif.eventId}`,
+    title: `${notif?.bucket}`,
+    body: `Hi User, ${notif.eventName}`,
     image: `https://res.cloudinary.com/ekosutrisno/image/upload/v1662785818/briix/notif_n0ogoj.jpg`,
     icon: 'https://res.cloudinary.com/ekosutrisno/image/upload/v1662786263/briix/n_pyzbuz.png',
   };
@@ -49,6 +53,13 @@ export function notify(notif: Message) {
   } else {
     console.log("Web Push Notifications does not supported.");
   }
+
+  $toast.open({
+    message: `Data has been ${notif.eventName}, from ${notif.bucket}`,
+    type: notifTypeMapper(notif.eventName),
+    position: 'top-right',
+    queue: false
+  });
 }
 
 export function requestPermission() {
@@ -79,7 +90,8 @@ export function notifTypeMapper(type: MessageType) {
 
 export interface Message {
   eventId: string
-  timestamp: string
+  timestamp: string,
+  bucket: string,
   eventName: MessageType
 }
 
