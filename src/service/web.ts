@@ -71,7 +71,7 @@ export function requestPermission() {
 }
 
 export function init() {
-  if (import.meta.env.VITE_BASE_WEB_SOCKET_ENABLED == 'true') {
+  if (import.meta.env.VITE_BASE_WEB_SOCKET_ENABLED) {
     connect();
     requestPermission();
   }
